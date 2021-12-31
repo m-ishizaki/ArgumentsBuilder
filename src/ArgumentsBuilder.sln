@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgumentsBuilder", "ArgumentsBuilder\ArgumentsBuilder.csproj", "{16EFB5CC-8551-4562-ABCE-1E1D8148A864}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgumentsBuilder.Test", "ArgumentsBuilder.Test\ArgumentsBuilder.Test.csproj", "{AB60493C-314B-4001-B924-EF7A8A8CEACD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16EFB5CC-8551-4562-ABCE-1E1D8148A864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16EFB5CC-8551-4562-ABCE-1E1D8148A864}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16EFB5CC-8551-4562-ABCE-1E1D8148A864}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16EFB5CC-8551-4562-ABCE-1E1D8148A864}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB60493C-314B-4001-B924-EF7A8A8CEACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB60493C-314B-4001-B924-EF7A8A8CEACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB60493C-314B-4001-B924-EF7A8A8CEACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB60493C-314B-4001-B924-EF7A8A8CEACD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
