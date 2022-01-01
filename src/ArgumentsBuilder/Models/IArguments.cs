@@ -8,5 +8,5 @@ namespace Rksoftware.ArgumentsBuilder.Models;
 
 public interface IArguments
 {
-    IEnumerable<string> ParameterNames { get; }
+    static IEnumerable<string> ParameterNames { get; } = new string[] { };
 }

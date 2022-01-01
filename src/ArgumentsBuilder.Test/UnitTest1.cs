@@ -5,7 +5,7 @@ namespace ArgumentsBuilder.Test;
 
 public class Tests
 {
-    class Arguments : Rksoftware.ArgumentsBuilder.Models.IArguments
+    class ArgumentsC : Rksoftware.ArgumentsBuilder.Models.IArguments
     {
         public IEnumerable<string> ParameterNames => new[] { nameof(Aparam), nameof(Bparam) };
 
@@ -37,6 +37,30 @@ public class Tests
             "/c",
             "copt",
             };
+        var parsed = Rksoftware.ArgumentsBuilder.ArgumentsBuilder.Parse<ArgumentsC>(args);
+        Assert.AreEqual(parsed.Aparam, "aparam");
+        Assert.AreEqual(parsed.Bparam, "bparam");
+        Assert.AreEqual(parsed.A, "aopt");
+        Assert.AreEqual(parsed.B, "bopt");
+        Assert.AreEqual(parsed.C, "copt");
+        Assert.AreEqual(parsed.D, true);
+        Assert.AreEqual(parsed.E, false);
+    }
+
+    [Test]
+    public void Test2()
+    {
+        var args = new[] {
+            "aparam",
+            "-a",
+            "aopt",
+            "-d",
+            "-b",
+            "bopt",
+            "bparam",
+            "/c",
+            "copt",
+            };
         var parsed = Rksoftware.ArgumentsBuilder.ArgumentsBuilder.Parse<Arguments>(args);
         Assert.AreEqual(parsed.Aparam, "aparam");
         Assert.AreEqual(parsed.Bparam, "bparam");
@@ -46,4 +70,10 @@ public class Tests
         Assert.AreEqual(parsed.D, true);
         Assert.AreEqual(parsed.E, false);
     }
+
+    record struct Arguments(string? Aparam, string? Bparam, string? A, string? B, string? C, bool D, bool E) : Rksoftware.ArgumentsBuilder.Models.IArguments
+    {
+        public static IEnumerable<string> ParameterNames => new[] { nameof(Aparam), nameof(Bparam) };
+    }
+
 }
