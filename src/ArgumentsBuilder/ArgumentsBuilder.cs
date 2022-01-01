@@ -10,7 +10,7 @@ namespace Rksoftware.ArgumentsBuilder;
 
 public static class ArgumentsBuilder
 {
-    public static T Parse<T>(string[] args) where T : IArguments, new()
+    public static T Parse<T>(string[] args) where T : new()
     {
         var argumentsType = typeof(T);
         List<string> parameters = new();
@@ -50,11 +50,19 @@ public static class ArgumentsBuilder
             optionProperty = null;
         }
 
-        var parameterNames = ((IEnumerable<string>)(argumentsType.GetProperty(nameof(IArguments.ParameterNames))?.GetValue(null) ?? new string[0])).ToList();
+        var constractor = argumentsType.GetConstructors().OrderByDescending(c => c.GetParameters().Length).FirstOrDefault();
+
+        var parameterNames =
+            Enumerable.Concat(
+                Enumerable.Concat(
+                    (constractor?.GetParameters().Where(p=>p.GetCustomAttribute<Attributes.ParameterAttribute>() != null).Select(p=>p.Name) ?? new string[0]),
+                    (argumentsType.GetProperties().Where(p => p.GetCustomAttribute<Attributes.ParameterAttribute>() != null).OrderBy(p=> p.GetCustomAttribute<Attributes.ParameterAttribute>()?.No).Select(p => p.Name) ?? new string[0])
+                ),
+                (IEnumerable<string>)(argumentsType.GetProperty(nameof(IArguments.ParameterNames))?.GetValue(null) ?? new string[0])
+            ).ToList();
         foreach (var o in options.Where(o => parameterNames.Contains(o.Key.Name)).ToArray()) options.Remove(o.Key);
         foreach (var o in switchs.Where(o => parameterNames.Contains(o.Key.Name)).ToArray()) options.Remove(o.Key);
 
-        var constractor = argumentsType.GetConstructors().OrderByDescending(c => c.GetParameters().Length).FirstOrDefault();
         T arguments = constractor switch
         {
             null => new(),
@@ -98,9 +106,13 @@ public static class ArgumentsBuilder
             }))(),
         };
 
-        foreach (var parameter in Enumerable.Zip(parameterNames, parameters)) argumentsType.GetProperty(parameter.First)?.SetValue(arguments, parameter.Second);
-        foreach (var option in options) option.Key.SetValue(arguments, option.Value);
-        foreach (var @switch in switchs) @switch.Key.SetValue(arguments, @switch.Value);
+        {
+            object boxed = arguments!;
+            foreach (var parameter in Enumerable.Zip(parameterNames, parameters)) argumentsType.GetProperty(parameter.First!)?.SetValue(boxed, parameter.Second);
+            foreach (var option in options) option.Key.SetValue(boxed, option.Value);
+            foreach (var @switch in switchs) @switch.Key.SetValue(boxed, @switch.Value);
+            arguments = (T)boxed;
+        }
 
         return arguments;
     }
