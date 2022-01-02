@@ -1,15 +1,36 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <AssemblyName>Rksoftware.$(MSBuildProjectName)</AssemblyName>
-    <RootNamespace>Rksoftware.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>Rksoftware.$(MSBuildProjectName)</AssemblyName>
+		<RootNamespace>Rksoftware.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
-  </ItemGroup>
+		<PackageOutputPath>./nupkg</PackageOutputPath>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<Authors>Rksoftware</Authors>
+		<Version>$(VersionPrefix)0.1.0</Version>
+		<DebugType>none</DebugType>
+
+		<Title>Arguments Builder</Title>
+		<Description>This library parses command line arguments for console applications.</Description>
+		<Summary>This library parses command line arguments for console applications.</Summary>
+		<PackageProjectUrl>https://github.com/m-ishizaki/ArgumentsBuilder</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/m-ishizaki/ArgumentsBuilder</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Copyright>m-ishizaki</Copyright>
+		<PackageReleaseNotes></PackageReleaseNotes>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\LICENSE" Pack="true" PackagePath="" />
+		<None Update="README.md" Pack="true" PackagePath="" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
+	</ItemGroup>
 
 </Project>
