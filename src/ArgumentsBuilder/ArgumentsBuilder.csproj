@@ -10,7 +10,7 @@
 		<PackageOutputPath>./nupkg</PackageOutputPath>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Authors>Rksoftware</Authors>
-		<Version>$(VersionPrefix)0.1.0</Version>
+		<Version>$(VersionPrefix)0.1.1</Version>
 		<DebugType>none</DebugType>
 
 		<Title>Arguments Builder</Title>
@@ -21,7 +21,7 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<Copyright>m-ishizaki</Copyright>
-		<PackageReleaseNotes></PackageReleaseNotes>
+		<PackageReleaseNotes>Add support ConfigureAppConfiguration.</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<ItemGroup>
