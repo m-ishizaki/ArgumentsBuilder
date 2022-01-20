@@ -16,7 +16,7 @@ public static class ConfigurationExtendions
         Enumerable.Concat(
         type.GetFields().Select(f => (f.Name, f.GetValue(arguments)?.ToString()))
         , type.GetProperties().Select(p => (p.Name, p.GetValue(arguments)?.ToString())))
-            .GroupBy(kv => kv.Name).Select(kv => ($"/{kv.Key}", kv.First().Item2)).SelectMany(kv => new string[] { kv.Item1, (kv.Item2) }).ToArray();
+            .GroupBy(kv => kv.Name).Select(kv => ($"/{kv.Key}", kv.First().Item2)).SelectMany(kv => new string?[] { kv.Item1, (kv.Item2) }).ToArray();
         
         return configurationBuilder.AddCommandLine(args);
     }
